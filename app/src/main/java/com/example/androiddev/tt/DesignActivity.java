@@ -29,14 +29,17 @@ public class DesignActivity extends AppCompatActivity {
     }
 
     private Tweet[] getTweets() {
-        Tweet[] tweets = new Tweet[10];
+        Tweet[] tweets = new Tweet[5];
         Random random = new Random();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < tweets.length; i++) {
             Tweet tweet = new Tweet();
             byte[] bytes = new byte[20];
             random.nextBytes(bytes);
-            tweet.setMessage(bytes.toString());
-            tweet.setCreated(new Date(random.nextLong()).toString());
+            tweet.setMessage(new String(bytes));
+            tweet.setCreatedAt(new Date(random.nextLong()));
+            bytes = new byte[8];
+            random.nextBytes(bytes);
+            tweet.getUser().setName(new String(bytes));
             tweet.setId(random.nextInt());
             tweets[i] = tweet;
         }

@@ -23,8 +23,9 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(TweetAdapter.ViewHolder holder, int position) {
         Tweet tweet = mData[position];
-        holder.tvCreatedAt.setText(tweet.getCreated());
+        holder.tvCreatedAt.setText(tweet.getCreatedAt().toString());
         holder.tvMessage.setText(tweet.getMessage());
+        holder.tvAccount.setText(tweet.getUser().getName());
     }
 
     @Override
@@ -32,7 +33,9 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
         return mData.length;
     }
 
-    public TweetAdapter(Tweet[] data) { mData = data; }
+    public TweetAdapter(Tweet[] data) {
+        mData = data;
+    }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView tvCreatedAt, tvMessage, tvAccount;
@@ -40,7 +43,7 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
             super(constraintLayout);
             tvCreatedAt = (TextView) constraintLayout.findViewById(R.id.tvCreatedAt);
             tvMessage = (TextView) constraintLayout.findViewById(R.id.tvMessage);
-            tvCreatedAt = (TextView) constraintLayout.findViewById(R.id.tvAccount);
+            tvAccount = (TextView) constraintLayout.findViewById(R.id.tvAccount);
         }
     }
 }

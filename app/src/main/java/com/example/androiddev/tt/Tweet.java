@@ -1,5 +1,7 @@
 package com.example.androiddev.tt;
 
+import java.util.Date;
+
 /**
  * Created by androiddev on 4/5/17.
  */
@@ -7,24 +9,35 @@ package com.example.androiddev.tt;
 public class Tweet {
     private long id;
     private String message;
-    private String created;
-    private Account account;
+    private Date createdAt;
+    private User user;
 
     public Tweet() {
         super();
-        account = new Account();
+        createdAt = new Date(0);
+        user = new User();
     }
 
-    public Account getAccount() {
-        return account;
+    public User getUser() {
+        return user;
     }
 
-    public class Account {
+    public class User {
         private long id;
         private String name;
+        private String imgUrl;
 
-        Account() {
+        public String getImgUrl() {
+            return imgUrl;
+        }
+
+        public void setImgUrl(String imgUrl) {
+            this.imgUrl = imgUrl;
+        }
+
+        User() {
             name = new String();
+            imgUrl = new String();
         }
 
         public long getId() {
@@ -60,11 +73,11 @@ public class Tweet {
         this.message = message;
     }
 
-    public String getCreated() {
-        return created;
+    public Date getCreatedAt() {
+        return createdAt;
     }
 
-    public void setCreated(String created) {
-        this.created = created;
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 }

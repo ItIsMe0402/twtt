@@ -40,20 +40,23 @@ public class RequestImpl extends StringRequest {
 
     @Override
     public Map<String, String> getParams() {
-        if (getMethod() == Method.POST)
-            return new HashMap<>(mParams);
         try {
             URL url = new URL(getUrl());
-            String[] paramsString = url.getQuery().split("&");
+            String query = url.getQuery();
             Map<String, String> params = new HashMap<>();
-            for (int i = 0; i < paramsString.length; i++) {
-                String paramString = paramsString[i];
-                if (paramString.length() == 0)
-                    break;
-                String[] keyValue = paramString.split("=");
-                if (keyValue.length == 2)
-                    params.put(keyValue[0], keyValue[1]);
+            if (query != null) {
+                String[] paramsString = query.split("&");
+                for (int i = 0; i < paramsString.length; i++) {
+                    String paramString = paramsString[i];
+                    if (paramString.length() == 0)
+                        break;
+                    String[] keyValue = paramString.split("=");
+                    if (keyValue.length == 2)
+                        params.put(keyValue[0], keyValue[1]);
+                }
             }
+            if (getMethod() == Method.POST)
+                params.putAll(mParams);
             return params;
         } catch (MalformedURLException e) {
             e.printStackTrace();
